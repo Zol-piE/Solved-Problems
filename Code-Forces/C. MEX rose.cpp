@@ -16,10 +16,20 @@ signed main()
         vector<int> arr(k+1,0);
         rep(0,n)
         {
-        	int x ; cin>>x;
-        	if(x<=k) arr[x]++;
+            int x ; cin>>x;
+            if(x<=k) arr[x]++;
         }
-        cout<<arr[k]<<endl;
-    }
+        int res  = 0 ;
+        for(int i =0;i<k;i++)
+        {
+                if(arr[i] == 0)
+                {
+                    res++;
+                    if(arr[k] !=0 ) arr[k]--;
+                }
+        }
+        cout<<res + arr[k]<<endl;
+
+        }
     return 0;
 }
