@@ -12,12 +12,14 @@ signed main()
     cin >> tc;
     while (tc--)
     {
-        int x , y; cin>>x>>y;
-        if(x==y || y<2) cout<<-1<<endl;
-        else 
+        int x,y;
+        cin>>x>>y;
+        if(y==1) cout<<-1<<endl;
+        else if(y>x) cout<<2<<endl;
+        else
         {
-        	if(x>y) cout<<3<<endl;
-        	else cout<<2<<endl;
+        	if((x-y) > 1) cout<<3<<endl;
+        	else cout<<-1<<endl;
         }
     }
     return 0;
