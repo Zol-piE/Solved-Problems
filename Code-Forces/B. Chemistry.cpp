@@ -2,65 +2,71 @@
 using namespace std;
 #define endl '\n'
 #define int long long
-#define c(var) cerr<<var<<endl;
 const int MOD = 1e9 + 7;
 const int INF = LLONG_MAX >> 1;
+#define nl cerr<<endl;
 #define rep(a,b) for(int i =a;i<b;i++)
 #define OP ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-void p(vector<int>&arr)
+void pr(vector<int>&arr)
 {
 	for(int i : arr) cerr<<i<<" ";
-	cerr<<endl;
 }
-bool solve(vector<int>&arr,int n,int k)
+bool chk(vector<int>&odd,int &n)
 {
-	// p(arr);
-	if(arr[0]==1) arr[0] =0;
+	int c_one = 0;
+	int c_odd = 0;
 	for(int i =0;i<n;i++)
 	{
-		if((arr[i] & 1))
+		if(odd[i] == 1) c_one++;
+		else if(odd[i] & 1)
 		{
-			k = k - (arr[i]%2);
-			arr[i] = arr[i] - (arr[i]%2);
+			c_odd++;
+			break;
 		}
+		if(c_one >1) break;
 	}
-	p(arr);
-	c(k);
-	if(!arr[0]) arr[0]=1;
-	if(k<0) return false;
-	else
-	{
-		int i = n-1;
-		int res = 0;
-		if(k & 1) 
-		{
-			res =1;
-			k -=res;
-		}
-		while(k>0 && i>=0)
-		{
-			if(arr[i] > k ) k = 0;
-			else k = k - arr[i];
-			i--;
-		}
-		p(arr);
-		c(k);
-		if(k>0 || arr[0] == 0 ) return false;
-		if(k==0)
-		{
-			if(res)
-			{
-				for(int i =0;i<n;i++)
-				{
-					if(arr[i] == 1 || arr[i] ==2) return true;
-				}
-				return false;
-			}
-			return true;
-		}
-	}
-	return false;
+	if(c_odd || c_one >1) return false;
+	else return true;
+
 }
+void solve(vector<int>&arr,int &n,int &k)
+{
+	int s = n;
+	while(k>0 && n>0)
+	{
+		pr(arr);nl
+		for(int i=s-1;i>=0;i--)
+		{
+			if(!arr[i]) continue;
+			if(arr[i] & 1 )
+			{
+				k = k - (arr[i] %2);
+				arr[i] = arr[i] - 1;
+				if(!arr[i]) n--;
+			}
+			else
+			{
+				if(arr[i] > k)
+				{
+					arr[i] = arr[i] - k;
+					k =0;
+				}
+				else
+				{
+					k = k -arr[i];
+					arr[i] = 0;
+					n--;
+				}
+			}
+			if(k==0) break;
+
+		}
+
+	}
+	pr(arr);nl cerr<<k<<endl;
+
+}
+
 signed main()
 {
 	int tc;
@@ -68,21 +74,47 @@ signed main()
 	while (tc--)
 	{
 		int n,k; cin>>n>>k;
-		unordered_map<char,int> fq;
-		vector<int>arr;
+		map<char,int>mp;
 		for(int i =0;i<n;i++)
 		{
-			char ch; cin>>ch;
-			fq[ch]++;
+			char ch ; cin>>ch;
+			mp[ch]++;
 		}
-		for (auto p : fq) {
-			// cout<<p.first<<" -- "<<p.second<<endl;
-			arr.push_back(p.second);
+        // for(auto x : mp) cout<<x.first<< ": "<<x.second<<endl;
+        // cout<<endl;
+		vector<int> even,odd;
+		for(auto x : mp)
+		{
+			if(x.second & 1) odd.push_back(x.second);
+			else even.push_back(x.second);
 		}
-		sort(arr.begin(),arr.end());
-		n = arr.size();
-		if(solve(arr,n,k)) cout<<"YES"<<endl;
-		else cout<<"NO"<<endl;
+		sort(odd.begin(),odd.end());
+		int odd_n = odd.size();
+		if(odd_n > k+1)
+		{
+			cout<<"NO"<<endl;
+			continue;
+		}
+		n = odd_n;
+		solve(odd,n,k);
+		bool ck = false;
+		if(!k && !n) ck = true;
+		if(!k && n )
+		{
+			ck = chk(odd,odd_n);
+		}
+		else
+		{
+			sort(even.begin(),even.end());
+			int even_n = even.size();
+			n = even_n;
+			solve(even,n,k);
+			if(n==0) ck = false;
+			else ck = chk(even,n);
+		}
+		if(!ck) cout<<"NO"<<endl;
+		else cout<<"YES"<<endl;
+
 	}
-		return 0;
+	return 0;
 }
