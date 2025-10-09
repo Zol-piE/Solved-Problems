@@ -15,27 +15,30 @@ signed main()
     while (tc--)
     {
         int n; cin>>n;
-        vector<int> arr(n,0);
-        int pSum = 0;
+        map<int,int> mp;
         for(int i =0 ; i<n;i++)
         {
-        	cin>>arr[i];
-        	pSum += (arr[i]) * 2 ;
-        }
-        bool  l = true;
-        for(int i =0;i<(n-1);i++)
-        {
-        	for(int j = i+1;j<n;j++)
-        	{
-        		l = (pSum - arr[i] -arr[j]) % (n-1);
-        		cerr<<(pSum - arr[i] -arr[j])<<endl;
-        		if(!l) break;
-        	}
-        	if(!l) break;
-        }
-        if(!l) yes
-        else no
+        	int x; cin>>x;
+            mp[x]++;
 
+        }
+        if(n==2) {yes continue; }
+        if(mp.size()>2) no
+        else if(mp.size()==1) yes
+        else
+        {
+            vector<int>freq(2,0);
+            int i =0;
+            for(auto x : mp)
+            {
+                freq[i++] = x.second;
+            }
+            cerr<<tc<<" "<<freq[0]<<' '<<freq[1]<<endl;
+            if(freq[0]> freq[1]) swap(freq[0],freq[1]);
+            if((n&1) && (freq[1] - freq[0]) ==1 ) yes
+            else if((freq[1] - freq[0]) == 0) yes
+            else no;
+        }
     }
     return 0;
 }
