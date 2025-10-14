@@ -22,28 +22,22 @@ signed main()
         vector<int> arr(n,0);
         rep(1,n) cin>>arr[i];
 
-        vector<int> num(n,1);
+        vector<int> res(n,0);
 
-        for(int i =2;i<n;i++) num[i] = i;
-        
-        vector<int> pSum(n,0);
-        pSum[1] = num[1];
-        rep(2,n)
-        {
-            pSum[i] = num[i] + pSum[i-1];
-        }
-
-        int c = 0;
         for(int i =1;i<n;i++)
         {
-            if((pSum[i] - arr[i]) > 0)
-            {
-                c++;
-                num[i] = arr[i] - arr[i-1];
-            }
+            res[i] = i - (arr[i] - arr[i-1]);
         }
-        if(c==1) num[n-1] = pSum[n-1] - arr[n-1];
-        pr(num,n);
+        for(int i =1;i<n;i++)
+        {
+            if(res[i] == 0)
+            {
+                res[i] = i;
+            } 
+            else res[i] = res[res[i]]; 
+        }
+        pr(res,n);
+
 
 
     }
