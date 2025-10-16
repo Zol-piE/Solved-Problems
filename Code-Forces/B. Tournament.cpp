@@ -28,26 +28,8 @@ signed main()
         	if(i ==j ) elem = arr[i];
         }
         sort(arr.begin(),arr.end());
-        if(k>j)
-        {
-        	yes
-        	continue;
-        }
-        int i;
-        for(i =1;i<=n;i++)
-        {
-        	if(arr[i] == elem)
-        	{
-        		break;
-        	}
-        }
-        if(k>=(n - i + 1))
-        {
-        	yes
-        	continue;
-        }
-        if(k == 2 || arr[n] == elem) yes
-       	else no
+        if(k==1 && arr[n] != elem) no
+        else yes
     }
     return 0;
 }
