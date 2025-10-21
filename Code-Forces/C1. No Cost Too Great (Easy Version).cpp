@@ -56,7 +56,7 @@ int solve(vector<int> &arr, int &n)
 
         for(int x: pf[arr[i] + 1 ]) freq[x]--;
 
-        for(int x: pf[arr[i]]) freq[x]--;
+        for(int x: pf[arr[i]]) freq[x]++;
     }
     return 2;
 }
