@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define int long long
+#define yes cout<<"YES"<<endl;
+#define no cout<<"NO"<<endl;
+const int MOD = 1e9 + 7;
+const int INF = LLONG_MAX >> 1;
+#define rep(a,b) for(int i =a;i<b;i++)
+#define OP ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+void pr(vector<int> &arr,int n)
+{
+    for(int i =0;i<n;i++) cout<<arr[i]<<" ";
+    cout<<endl;
+}
+signed main()
+{
+    int tc;
+    cin >> tc;
+    while (tc--)
+    {
+        int n;cin>>n;
+        vector<int> arr(n,0);
+        for(int i =0;i<n;i++) cin>>arr[i];
+        bool e = false;
+    	bool o = false;
+        for(int i =0;i<n;i++)
+        {
+        	if(arr[i] & 1) o = true;
+        	else e = true;
+        	if(e && o) break;
+        }
+        if(e && o) 
+        {
+        	sort(arr.begin(),arr.end());
+        	for(int x: arr) cout<<x<<" ";
+        	cout<<endl;
+        }
+        else pr(arr,n);
+    }
+    return 0;
+}
