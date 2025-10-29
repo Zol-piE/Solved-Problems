@@ -13,18 +13,6 @@ void pr(vector<int> &arr,int n)
     for(int i =0;i<n;i++) cout<<arr[i]<<" ";
     cout<<endl;
 }
-vector<int> prime_factors(int n) {
-    vector<int> primes;
-    for (int i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
-            primes.push_back(i);
-            while (n % i == 0)
-                n /= i;
-        }
-    }
-    if (n > 1) primes.push_back(n);
-    return primes;
-}
 signed main()
 {
     int tc;
@@ -34,32 +22,17 @@ signed main()
         int n; cin>>n;
         vector<int> arr(n,0);
         rep(0,n) cin>>arr[i];
-        int gc =0;
-        for(int i =0;i<n;i++)
+        vector<int> crr(n,0);
+        rep(0,n) cin>>crr[i];
+        int res =0;
+        for(int i =0;i<n-1;i++)
         {
-        	gc = __gcd(arr[i],gc);
+            if(arr[i] > arr[i+1])
+            {
+                res += crr[i];
+            }
         }
-        vector<int> pf = prime_factors(gc);
-        bool t = true;
-        for(int i =2;i<=100;i++)
-        {
-        	bool l = true;
-        	for(int x : pf)
-        	{
-        		if(i % x == 0) 
-        		{
-        			l = false;
-        			break;
-        		}
-        	}
-        	if(l)
-        	{
-        		cout<<i<<endl;
-        		t = false;
-        		break;
-        	}
-        }
-        if(t) cout<<-1<<endl;
+        cout<<res<<endl;
     }
     return 0;
 }
