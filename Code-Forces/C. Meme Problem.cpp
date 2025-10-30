@@ -13,32 +13,24 @@ void pr(vector<int> &arr,int n)
     for(int i =0;i<n;i++) cout<<arr[i]<<" ";
     cout<<endl;
 }
-
 signed main()
 {
     int tc;
     cin >> tc;
     while (tc--)
     {
-        int d; cin>>d;
-        bool l = true;
-        if(d==1) 
+        int d;cin>>d;
+        int dif = (d*d) - 4*d;
+        if(dif<0)
         {
-        	cout << fixed << setprecision(9) << (double)d << " " << (double)(d) << endl;
-        	continue;
+            cout<<"N"<<endl;
+            continue;
         }
-        for(int i =2;i<=d;i++)
-        {
-        	if(d == ((d/i)+i))
-        	{
-        		cout<<"Y ";
-        		cout << fixed << setprecision(9) << ((double)i - 0.000001) << " " << (double)(d - i + 0.000001) << endl;
-        		l = false;
-        		break;
-
-        	}
-        }
-        if(l) cout<<"N"<<endl;
+        double a = sqrt(dif);
+        a = a + d;
+        a = a / 2;
+        double b = d - a;
+        cout<<"Y " << fixed << setprecision(9) << a << " " << b << endl;
     }
     return 0;
 }
