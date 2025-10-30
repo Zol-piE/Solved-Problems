@@ -13,26 +13,51 @@ void pr(vector<int> &arr,int n)
     for(int i =0;i<n;i++) cout<<arr[i]<<" ";
     cout<<endl;
 }
+vector<int> printPrime(int n)
+{
+    vector<bool> arr(n+1,true);
+    for(int i=2;i*i<=n;i++)
+    {
+        if(arr[i])
+        {
+            for(int j = i*i;j<=n;j+=i)
+            {
+                arr[j] = false;
+            }
+        }
+    }
+    vector<int> pr;
+    for(int i=2;i<=n;i++)
+    {
+        if(arr[i]) pr.push_back(i);
+    }
+    return pr;
+}
 signed main()
 {
     int tc;
     cin >> tc;
+    vector<int> p = printPrime(100);
     while (tc--)
     {
         int n; cin>>n;
-        vector<int> arr(n,0);
-        rep(0,n) cin>>arr[i];
-        vector<int> crr(n,0);
-        rep(0,n) cin>>crr[i];
-        int res =0;
-        for(int i =0;i<n-1;i++)
+        vector<int> arr(n);
+        for(int &x : arr) cin>>x;
+        int l = false;
+        for(int x : p)
         {
-            if(arr[i] > arr[i+1])
+            for(int y : arr)
             {
-                res += crr[i];
+                if(y % x)
+                {
+                    cout<<x<<endl;
+                    l = true;
+                    break;
+                }
             }
+            if(l) break;
         }
-        cout<<res<<endl;
+
     }
     return 0;
 }
