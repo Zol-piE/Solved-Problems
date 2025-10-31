@@ -21,11 +21,14 @@ signed main()
     {
         int n; cin>>n;
         vector<int>arr,brr;
-        int x ; cin>>x;
-        arr.push_back(x);
+        vector<int> crr(n);
+        for(int &x:crr) cin>>x;
+
+        sort(crr.begin(),crr.end());
+        arr.push_back(crr[0]);
         for(int i=1;i<n;i++)
         {
-        	cin>>x;
+        	int x = crr[i];
         	bool l = true;
         	for(int j: arr)
         	{
