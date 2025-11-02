@@ -28,16 +28,9 @@ void pr(vector<int> &arr,int n)
     for(int i =0;i<n;i++) cout<<arr[i]<<" ";
     cout<<endl;
 }
-signed main()
+bool WorngSolve(string &str,int &n)
 {
-    OP
-    int tc;
-    cin >> tc;
-    while (tc--)
-    {
-        int n; cin>>n;
-        string str; cin>>str;
-        vector<int> ch(26,0);
+	vector<int> ch(26,0);
         for(int i =0;i<n;i++)
         {
         	ch[str[i] - 97]++;
@@ -63,8 +56,32 @@ signed main()
         		break;
         	}
         }
-        if(l) no
-        else yes
+        return l;
+}
+bool solve(string &str,int &n)
+{
+	vector<bool> ch(26,false);
+
+	for(int i =0;i<n;i++)
+	{
+		int j = str[i] - 97;
+		if(ch[j]) return false;
+		ch[j] = true;
+	}
+	return true;
+}
+signed main()
+{
+    OP
+    int tc;
+    cin >> tc;
+    while (tc--)
+    {
+        int n; cin>>n;
+        string str; cin>>str;
+        
+        if(solve(str,n)) yes
+        else no
     }
     return 0;
 }
