@@ -1,7 +1,3 @@
-3
-2
-ab
-7
-abababc
-9
-abcabcabc
+1
+7 3
+1110111
