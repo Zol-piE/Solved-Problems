@@ -47,11 +47,17 @@ signed main()
         vi arr(n);
         for(int &x:arr)
         {
-        	cin>>x;
         	avg+=x;
         }
-        cout<<avg/n<<endl;
-
+        int j = 0;
+        for(int i =0;i<n;i++)
+        {
+          if(arr[i]>=a)
+          {
+            j = i;
+            break;
+          }
+        }
     }
     return 0;
 }
