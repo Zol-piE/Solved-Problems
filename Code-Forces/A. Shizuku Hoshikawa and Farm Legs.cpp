@@ -57,11 +57,12 @@ signed main() {
     	cout<<0<<endl;
     	continue;
     }
-    int i =0;
-    for(i =0;(2*i) <= (n/2);i++){}
+    // int i =0;
+    // for(i =0;(2*i) <= (n/2);i++){}
 
-    cout<<i<<endl;
+    // cout<<i<<endl;
 
+    cout<<(n/4) +1<<endl;
     }
 
     return 0;
