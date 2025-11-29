@@ -26,22 +26,18 @@ signed main() {
     vi arr(n+1,0);
     rep(1,n+1) cin>>arr[i];
     sort(arr.begin(),arr.end());
-    if(arr[n] == 1)
-    {
-    	cout<<1<<endl;
-    	continue;
-    }
-    int l = 0;
+
+    int l = 0,sum = 0;
     for(int i =1;i<=n;i++)
     {
     	if(arr[i] == 0)
     	{
     		l++;
     	}
-    	else break;
+        sum +=arr[i];
     }
     int r = n - l;
-    cout<<r - (n - arr[n] ) <<endl;
+    cout<<min(r,sum - (n-1))<<endl;
 
     }
 
