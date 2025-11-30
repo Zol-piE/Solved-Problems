@@ -25,9 +25,10 @@ signed main() {
     int n; cin>>n;
     vi arr(n+1,0);
     rep(1,n+1) cin>>arr[i];
-    sort(arr.begin(),arr.end());
+    sort(arr.begin()+1,arr.end());
 
-    int l = 0,sum = 0;
+    int l = 0;
+    ll sum = 0;
     for(int i =1;i<=n;i++)
     {
     	if(arr[i] == 0)
@@ -37,7 +38,7 @@ signed main() {
         sum +=arr[i];
     }
     int r = n - l;
-    cout<<min(r,sum - (n-1))<<endl;
+    cout<<min(1ll*r,sum - (n-1))<<endl;
 
     }
 
