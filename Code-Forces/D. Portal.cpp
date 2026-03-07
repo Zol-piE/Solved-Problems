@@ -51,7 +51,54 @@ signed main() {
     while (tc--) {
 
     int n ,x,y; cin>>n>>x>>y;
+    vector<int> arr(n+1,0);
 
+    rep(1,n+1) cin>>arr[i];
+
+    deque<int> dq,dp;
+
+   	int mi = INT_MAX;
+    for(int i = x+1;i<=y;i++)
+    {
+    	dq.push_back(arr[i]);
+    	mi = min(mi,arr[i]);
+    	arr[i] = -1;
+    }
+    while(dq.front()!= mi)
+    {
+    	int x = dq.front();
+    	dq.pop_front();
+    	dq.push_back(x);
+    }
+    bool l = false;
+    for(int i =1;i<=n;i++)
+    {
+    	if(arr[i] != -1)
+    	{
+    		if(l == false && arr[i]< mi)
+    		{
+    			dp.push_back(arr[i]);
+    		}
+    		else
+    		{
+    			l = true;
+    			dq.push_back(arr[i]);
+    		}
+    	}
+    }
+
+    while(!dp.empty())
+    {
+    	cout<<dp.front()<<" ";
+    	dp.pop_front();
+    }
+    while(!dq.empty())
+    {
+    	cout<<dq.front()<<" ";
+    	dq.pop_front();
+    }
+
+    cout<<endl;
     }
 
     return 0;
