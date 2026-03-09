@@ -51,20 +51,32 @@ signed main() {
     while (tc--) {
 
     int n,m,l; cin>>n>>m>>l;
-
-    vector<int> arr(n,0);
-    int j = 0;
-    arr[0] = 1;
-    arr[1] = 5;
-    arr[2] = 5;
-    for(int i =18;i<=l;i++)
+    m =5;
+    vector<int> arr(m,0);
+    unordered_map<int,bool,custom_hash> mp;
+    for(int i =0;i<n;i++)
     {
-    	cout<<i<<" -> ";
-    	pr(arr,n);
-
-    arr[j]++;
-    j = (j+1) % m;
+        int x; cin>>x;
+        mp[x] = true;
     }
+    int i = 0;
+    cout<<i<< " -> ";pr(arr,m);
+    int j = 0;
+    i++;
+    for(;i<=l;i++)
+    {
+        arr[j]++;
+        j = (j+1) % m;
+        cout<<i<< " -> ";pr(arr,m);
+        if(mp[i])
+        {
+            sort(arr.begin(),arr.end(),greater<int>());
+            arr[0] = 0;
+            j =0;
+        }
+
+    }
+
     }
 
     return 0;
