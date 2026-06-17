@@ -49,35 +49,12 @@ signed main() {
     int tc;
     cin >> tc;
     while (tc--) {
-
-    int n,m,l; cin>>n>>m>>l;
-    unordered_map<int,bool,custom_hash> mp;
-    for(int i =0;i<n;i++)
-    {
-        int x; cin>>x;
-        mp[x] = true;
-    }
-
-    vector<int> arr(m,0);
-    int j = 0;
-    int i =1;
-    for(;i<=l;i++)
-    {
-        if((n-j) < (m-1)) break;
-        arr[0]++;
-        sort(arr.begin(),arr.end());
-        if(mp[i])
-        {
-            j++;
-            rotate(arr.begin(),arr.end()-1,arr.end());
-            arr[0] = 0;
-            cout<<i<<" -> ";pr(arr,m);
-        }
+        cout<<"hje"<<endl;
 
     }
 
 
-    }
+    
 
     return 0;
 }
