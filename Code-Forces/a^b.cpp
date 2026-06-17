@@ -1,19 +1,71 @@
 #include <bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp>
+using namespace boost::multiprecision;
+
+
+
+
 using namespace std;
+
 #define endl '\n'
-const int MOD = 1e9 + 7;
-#define rep(a,b) for(int i =a;i<b;i++)
-#define OP ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-signed main()
+#define yes cout << "YES\n";
+#define no  cout << "NO\n";
+
+using ll = long long;
+
+const ll MOD = 1e9 + 7;
+const ll INF = LLONG_MAX >> 1;
+
+#define rep(a,b) for(ll i = (a); i < (b); i++)
+#define ZolpiE ios_base::sync_with_stdio(false); cin.tie(nullptr);
+
+using vi = vector<int>;
+
+
+struct custom_hash {
+    static uint64_t splitmix64(uint64_t x) {
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+        return x ^ (x >> 31);
+    }
+    size_t operator()(uint64_t x) const {
+        static const uint64_t FIXED_RANDOM =
+            chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
+using ui = unordered_map<int,int,custom_hash>;
+ll sq(ll n) {
+    long double r = sqrtl((long double)n);
+    ll ans = (ll)r;
+    while ((__int128)ans * ans > n) ans--;
+    while ((__int128)(ans + 1) * (ans + 1) <= n) ans++;
+    return ans;
+}
+
+void pr(vi &arr, int n) {
+    for (ll i = 0; i < n; i++) cout << arr[i] << " ";
+    cout << endl;
+}
+
+
+cpp_int expo(cpp_int a, cpp_int b)
 {
-    
-        int a ,b ; cin>>a>>b;
-        int sum1 = a % MOD ;
-        sum1 = ((int)pow(sum1,b))%MOD;
-        int sum2 = b % MOD ;
-        sum2 = ((int)pow(sum2,a)) % MOD;
-        cout<<sum1-sum2<<endl;
-        
-    
+    cpp_int res = 1;
+    while(b)
+    {
+        if(b & 1) res *= a;
+        a *= a;
+        b >>= 1;
+    }
+    return res;
+}
+signed main() {
+    ZolpiE
+
+    cpp_int a,b; cin>>a>>b;
+    cout<<expo(a,b) - expo(b,a) <<endl;
+
     return 0;
 }
