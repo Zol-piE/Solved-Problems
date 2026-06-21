@@ -72,19 +72,30 @@ signed main()
         inputarray(brr, n);
         set<int> st(brr.begin(), brr.end());
         unordered_map<int, int, custom_hash> mp;
+        bool l = false;
         for (int i = 0; i < n; i++)
         {
-            int x = *(st.lower_bound(arr[i]));
-            mp[x] = arr[i];
+            auto x = (st.lower_bound(arr[i]));
+            if (x == st.end())
+            {
+                l = true;
+                break;
+            }
+            mp[(*x)] = arr[i];
             // cout << x << " " << mp[x] << endl;
             st.erase(x);
+        }
+        if (l)
+        {
+            cout << -1 << endl;
+            continue;
         }
         int c = 0;
         for (int i = 0; i < n; i++)
         {
-            if (arr[i] > brr[i])
+            if (arr[i] != mp[brr[i]])
             {
-                int k = 0, x = mp[brr[i]];
+                int k = i, x = mp[brr[i]];
 
                 for (; k < n; k++)
                 {
@@ -99,17 +110,6 @@ signed main()
                 }
             }
         }
-        bool l = false;
-        for (int i = 0; i < n; i++)
-        {
-            if (arr[i] > brr[i])
-            {
-                l = true;
-                break;
-            }
-        }
-        if (l)
-            c = -1;
         cout << c << endl;
     }
 
