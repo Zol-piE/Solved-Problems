@@ -46,9 +46,21 @@ signed main()
     cin >> a >> b;
     int c, d;
     cin >> c >> d;
-    for (int i = 1; i <= 100; i++)
+    int i = 0;
+    bool l = false;
+    for (; i <= 100; i++)
     {
+        int x = (b - d) + (i * a);
+        if (x >= 0 && (x % c) == 0)
+        {
+            l = true;
+            break;
+        }
     }
+    if (l)
+        cout << (b + (i * a)) << endl;
+    else
+        cout << -1 << endl;
 
     return 0;
 }
