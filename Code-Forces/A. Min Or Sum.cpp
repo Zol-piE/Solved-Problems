@@ -53,17 +53,8 @@ signed main()
         for (int i = 1; i < n; i++)
         {
             int x = (arr[i - 1] | arr[i]);
-            // cout << x << " ";
-            if ((x == arr[i] || x == arr[i - 1]) || (x & 1) == 0)
-            {
-                arr[i - 1] = 0;
-                arr[i] = x;
-            }
-            else
-            {
-                arr[i - 1] = 1;
-                arr[i] = x - 1;
-            }
+            arr[i - 1] = 0;
+            arr[i] = x;
         }
         // cout << endl;
         ll sum = 0;
